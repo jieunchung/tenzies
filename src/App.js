@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import Die from "./components/Die";
 
+/**
+ * roll dice, generate new numbers
+ */
+
 const App = () => {
   const [dice, setDice] = useState(allNewDice());
 
@@ -17,12 +21,18 @@ const App = () => {
     return diceArray;
   }
 
+  const rollDice = () => {
+    setDice(allNewDice());
+  };
   const diceElements = dice.map((die) => <Die value={die} />);
 
   return (
     <main>
       <div className="game">
         <div className="die-grid">{diceElements}</div>
+        <button className="roll-button" onClick={rollDice}>
+          Roll
+        </button>
       </div>
     </main>
   );
