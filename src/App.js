@@ -3,9 +3,7 @@ import Die from "./components/Die";
 import { nanoid } from "nanoid";
 
 /**
- * update the array of numbers in state to be
- * an array of objects instead.
- * include value:<randomnumber>, isHeld.false
+ * change the background color for when the dice is being held.
  */
 
 const App = () => {
@@ -27,7 +25,7 @@ const App = () => {
     setDice(allNewDice());
   };
   const diceElements = dice.map((die) => (
-    <Die key={die.id} value={die.value} />
+    <Die key={die.id} value={die.value} isHeld={die.isHeld} />
   ));
 
   return (

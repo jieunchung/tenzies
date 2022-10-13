@@ -43,7 +43,6 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #ffffff;
   font-weight: 600;
   font-size: 1.5rem;
   cursor: pointer;
@@ -58,4 +57,5 @@ main {
   border-radius: 0.5rem;
   font-weight: 600;
   font-size: 1rem;
+  cursor: pointer;
 }
