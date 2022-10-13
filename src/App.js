@@ -1,22 +1,24 @@
 import React, { useState } from "react";
 import Die from "./components/Die";
+import { nanoid } from "nanoid";
 
 /**
- * roll dice, generate new numbers
+ * update the array of numbers in state to be
+ * an array of objects instead.
+ * include value:<randomnumber>, isHeld.false
  */
 
 const App = () => {
   const [dice, setDice] = useState(allNewDice());
 
-  /**
-   * changed const to function.
-   * javascript moves the function to the top when using function
-   * so you can access it before initialization.
-   */
   function allNewDice() {
     const diceArray = [];
     for (let i = 0; i < 10; i++) {
-      diceArray.push(Math.floor(Math.random() * 6) + 1);
+      diceArray.push({
+        value: Math.floor(Math.random() * 6) + 1,
+        isHeld: false,
+        id: nanoid(),
+      });
     }
     return diceArray;
   }
@@ -24,7 +26,9 @@ const App = () => {
   const rollDice = () => {
     setDice(allNewDice());
   };
-  const diceElements = dice.map((die) => <Die value={die} />);
+  const diceElements = dice.map((die) => (
+    <Die key={die.id} value={die.value} />
+  ));
 
   return (
     <main>
