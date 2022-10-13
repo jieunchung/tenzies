@@ -3,9 +3,9 @@ import Die from "./components/Die";
 import { nanoid } from "nanoid";
 
 /**
- * change the background color for when the dice is being held.
+ * send a prop down that will log its unique id
+ * everytime it's clicked
  */
-
 const App = () => {
   const [dice, setDice] = useState(allNewDice());
 
@@ -25,8 +25,19 @@ const App = () => {
     setDice(allNewDice());
   };
   const diceElements = dice.map((die) => (
-    <Die key={die.id} value={die.value} isHeld={die.isHeld} />
+    <Die
+      key={die.id}
+      value={die.value}
+      isHeld={die.isHeld}
+      holdDice={() => {
+        holdDice(die.id);
+      }}
+    />
   ));
+
+  function holdDice(id) {
+    console.log(id);
+  }
 
   return (
     <main>
