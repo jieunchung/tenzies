@@ -1,39 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import Die from "./components/Die";
 
-/**
- *
- * Write a function that returns an array
- * of 10 random numbers between 1-6 inclusive.
- *
- * Log the array of numbers to the console for now
- */
-
 const App = () => {
-  const allNewDice = () => {
-    const numberArray = [];
+  const [dice, setDice] = useState(allNewDice());
+
+  /**
+   * changed const to function.
+   * javascript moves the function to the top when using function
+   * so you can access it before initialization.
+   */
+  function allNewDice() {
+    const diceArray = [];
     for (let i = 0; i < 10; i++) {
-      numberArray.push(Math.floor(Math.random() * 6) + 1);
+      diceArray.push(Math.floor(Math.random() * 6) + 1);
     }
-    return numberArray;
-  };
-  console.log(allNewDice());
+    return diceArray;
+  }
+
+  const diceElements = dice.map((die) => <Die value={die} />);
 
   return (
     <main>
       <div className="game">
-        <div className="die-grid">
-          <Die value="1" />
-          <Die value="2" />
-          <Die value="3" />
-          <Die value="4" />
-          <Die value="5" />
-          <Die value="6" />
-          <Die value="1" />
-          <Die value="8" />
-          <Die value="9" />
-          <Die value="1" />
-        </div>
+        <div className="die-grid">{diceElements}</div>
       </div>
     </main>
   );
