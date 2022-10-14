@@ -17,9 +17,24 @@ const App = () => {
     return diceArray;
   }
 
+  /**
+   * only roll dice that are not being held
+   */
+
   const rollDice = () => {
-    setDice(allNewDice());
+    setDice((oldDice) =>
+      oldDice.map((oldDie) => {
+        return oldDie.isHeld
+          ? { ...oldDie }
+          : {
+              ...oldDie,
+              value: Math.floor(Math.random() * 6) + 1,
+              id: nanoid(),
+            };
+      })
+    );
   };
+
   const diceElements = dice.map((die) => (
     <Die
       key={die.id}
@@ -40,13 +55,15 @@ const App = () => {
       })
     );
   }
-  /* function holdDice(id) {
-    console.log(id);
-  } */
 
   return (
     <main>
       <div className="game">
+        <h1 className="title">Tenzies</h1>
+        <p className="description">
+          Roll untill all dice are the same. <br /> Click each die to hold it at
+          its current value between rolls.
+        </p>
         <div className="die-grid">{diceElements}</div>
         <button className="roll-button" onClick={rollDice}>
           Roll
