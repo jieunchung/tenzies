@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import Die from "./components/Die";
 import { nanoid } from "nanoid";
 
-/**
- * send a prop down that will log its unique id
- * everytime it's clicked
- */
 const App = () => {
   const [dice, setDice] = useState(allNewDice());
 
@@ -36,8 +32,17 @@ const App = () => {
   ));
 
   function holdDice(id) {
-    console.log(id);
+    setDice((oldDice) =>
+      oldDice.map((oldDie) => {
+        return oldDie.id === id
+          ? { ...oldDie, isHeld: !oldDie.isHeld }
+          : oldDie;
+      })
+    );
   }
+  /* function holdDice(id) {
+    console.log(id);
+  } */
 
   return (
     <main>
