@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import Die from "./components/Die";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
-import {useWindowSize} from 'react-use';
-
+import { useWindowSize } from "react-use";
 
 const App = () => {
   const [dice, setDice] = useState(allNewDice());
   const [tenzies, setTenzies] = useState(false);
-  const {width, height} = useWindowSize();
+  const { width, height } = useWindowSize();
 
   function allNewDice() {
     const diceArray = [];
@@ -23,17 +22,19 @@ const App = () => {
   }
 
   const rollDice = () => {
-    setDice((oldDice) =>
-      oldDice.map((oldDie) => {
-        return oldDie.isHeld
-          ? { ...oldDie }
-          : {
-              ...oldDie,
-              value: Math.floor(Math.random() * 6) + 1,
-              id: nanoid(),
-            };
-      })
-    );
+    tenzies
+      ? setDice(allNewDice())
+      : setDice((oldDice) =>
+          oldDice.map((oldDie) => {
+            return oldDie.isHeld
+              ? { ...oldDie }
+              : {
+                  ...oldDie,
+                  value: Math.floor(Math.random() * 6) + 1,
+                  id: nanoid(),
+                };
+          })
+        );
   };
 
   function holdDice(id) {
@@ -64,7 +65,6 @@ const App = () => {
 
     if (isHeld && allSameValues) {
       setTenzies(true);
-      console.log("you won!");
     } else {
       setTenzies(false);
     }
