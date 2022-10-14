@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Die from "./components/Die";
 import { nanoid } from "nanoid";
+import Confetti from "react-confetti";
+import {useWindowSize} from 'react-use';
+
 
 const App = () => {
   const [dice, setDice] = useState(allNewDice());
+  const [tenzies, setTenzies] = useState(false);
+  const {width, height} = useWindowSize();
 
   function allNewDice() {
     const diceArray = [];
@@ -16,10 +21,6 @@ const App = () => {
     }
     return diceArray;
   }
-
-  /**
-   * only roll dice that are not being held
-   */
 
   const rollDice = () => {
     setDice((oldDice) =>
@@ -35,6 +36,16 @@ const App = () => {
     );
   };
 
+  function holdDice(id) {
+    setDice((oldDice) =>
+      oldDice.map((oldDie) => {
+        return oldDie.id === id
+          ? { ...oldDie, isHeld: !oldDie.isHeld }
+          : oldDie;
+      })
+    );
+  }
+
   const diceElements = dice.map((die) => (
     <Die
       key={die.id}
@@ -46,18 +57,22 @@ const App = () => {
     />
   ));
 
-  function holdDice(id) {
-    setDice((oldDice) =>
-      oldDice.map((oldDie) => {
-        return oldDie.id === id
-          ? { ...oldDie, isHeld: !oldDie.isHeld }
-          : oldDie;
-      })
-    );
-  }
+  useEffect(() => {
+    const isHeld = dice.every((die) => die.isHeld);
+    const firstDie = dice[0].value;
+    const allSameValues = dice.every((die) => die.value === firstDie);
+
+    if (isHeld && allSameValues) {
+      setTenzies(true);
+      console.log("you won!");
+    } else {
+      setTenzies(false);
+    }
+  }, [dice]);
 
   return (
     <main>
+      {tenzies && <Confetti width={width} height={height} />}
       <div className="game">
         <h1 className="title">Tenzies</h1>
         <p className="description">
@@ -66,7 +81,7 @@ const App = () => {
         </p>
         <div className="die-grid">{diceElements}</div>
         <button className="roll-button" onClick={rollDice}>
-          Roll
+          {tenzies ? "New Game" : "Roll"}
         </button>
       </div>
     </main>
