@@ -60,6 +60,7 @@ const App = () => {
       holdDice={() => {
         holdDice(die.id);
       }}
+      tenzies={tenzies}
     />
   ));
 
@@ -84,7 +85,7 @@ const App = () => {
       {tenzies && <Confetti width={width} height={height} />}
       <div className="game">
         <div className="data">
-          <Timer tenzies={tenzies} timer={timer} />
+          <Timer timer={timer} />
           <div className="counter">{counter} rolls</div>
         </div>
         <h1 className="title">Tenzies</h1>

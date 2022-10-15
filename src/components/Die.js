@@ -9,8 +9,14 @@ import {
 } from "react-icons/gi";
 
 const Die = (props) => {
+  console.log(props.tenzies);
   const styles = {
-    color: props.isHeld ? "#FA2C33" : "#0c2334",
+    color:
+      props.isHeld && props.tenzies
+        ? "#4cbf7a"
+        : props.isHeld
+        ? "#FA2C33"
+        : "#0c2334",
   };
   return (
     <div className="die" style={styles} onClick={props.holdDice}>
