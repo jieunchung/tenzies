@@ -7,6 +7,7 @@ import { useWindowSize } from "react-use";
 const App = () => {
   const [dice, setDice] = useState(allNewDice());
   const [tenzies, setTenzies] = useState(false);
+  const [counter, setCounter] = useState(0);
   const { width, height } = useWindowSize();
 
   function allNewDice() {
@@ -35,6 +36,7 @@ const App = () => {
                 };
           })
         );
+    tenzies ? setCounter(0) : setCounter(counter + 1);
   };
 
   function holdDice(id) {
@@ -74,6 +76,7 @@ const App = () => {
     <main>
       {tenzies && <Confetti width={width} height={height} />}
       <div className="game">
+        <p className="counter">Rolls: {counter}</p>
         <h1 className="title">Tenzies</h1>
         <p className="description">
           Roll untill all dice are the same. <br /> Click each die to hold it at

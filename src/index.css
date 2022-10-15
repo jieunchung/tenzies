@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo+Play:wght@500&family=Oxanium:wght@200&display=swap");
+
 * {
   box-sizing: border-box;
 }
@@ -13,8 +15,9 @@ body {
 
 main {
   background-color: #0c2334;
-  width: 600px;
-  height: 600px;
+  max-width: 600px;
+  min-height: 600px;
+  padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,8 +25,8 @@ main {
 
 .game {
   background-color: #f6f6f6;
-  width: 500px;
-  height: 500px;
+  max-width: 600px;
+  min-height: 500px;
   border-radius: 1em;
   display: flex;
   flex-direction: column;
@@ -31,17 +34,25 @@ main {
   justify-content: space-around;
 }
 
-.confetti {
-  
+.counter {
+  width: 100%;
+  text-align: end;
+  margin: 0 2rem 0 0;
+  font-size: 0.9rem;
+  font-family: "Oxanium", cursive;
 }
 
 .title {
   margin: 0;
+  padding: 1rem;
+  font-family: "Cairo Play", cursive;
 }
 
 .description {
   margin: 0;
   text-align: center;
+  padding: 1rem;
+  font-family: "Oxanium", cursive;
 }
 
 .die-grid {
@@ -51,13 +62,11 @@ main {
 }
 
 .die {
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
-  height: 50px;
+  height: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 600;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   cursor: pointer;
 }
 
@@ -71,4 +80,32 @@ main {
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
+  font-family: "Oxanium", cursive;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  main {
+    max-width: 500px;
+  }
+  .game {
+    max-width: 400px;
+    padding: 1rem;
+  }
+  .counter {
+    margin: 0.5rem 1rem 0 0;
+    font-size: 0.8rem;
+  }
+  .title {
+    font-size: 1.8rem;
+  }
+  .description {
+    font-size: 0.8rem;
+  }
+  .die-grid {
+    display: grid;
+    gap: 0;
+    grid-template-columns: 40px 40px 40px 40px 40px;
+    margin-bottom: 1rem;
+  }
 }
