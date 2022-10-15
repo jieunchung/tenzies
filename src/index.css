@@ -34,10 +34,26 @@ main {
   justify-content: space-around;
 }
 
+.data {
+  display: flex;
+  width: 90%;
+  align-items: center;
+}
+
+.timer {
+  width: 100%;
+  font-family: "Oxanium", cursive;
+  font-size: 0.8rem;
+}
+
+.timer > span {
+  font-size: 0.9rem;
+}
+
+
 .counter {
   width: 100%;
   text-align: end;
-  margin: 0 2rem 0 0;
   font-size: 0.9rem;
   font-family: "Oxanium", cursive;
 }
@@ -93,7 +109,6 @@ main {
     padding: 1rem;
   }
   .counter {
-    margin: 0.5rem 1rem 0 0;
     font-size: 0.8rem;
   }
   .title {

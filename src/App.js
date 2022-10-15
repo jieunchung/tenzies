@@ -3,11 +3,13 @@ import Die from "./components/Die";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
+import Timer from "./components/Timer";
 
 const App = () => {
   const [dice, setDice] = useState(allNewDice());
   const [tenzies, setTenzies] = useState(false);
   const [counter, setCounter] = useState(0);
+  const [timer, setTimer] = useState(0);
   const { width, height } = useWindowSize();
 
   function allNewDice() {
@@ -37,6 +39,7 @@ const App = () => {
           })
         );
     tenzies ? setCounter(0) : setCounter(counter + 1);
+    tenzies && setTimer(0);
   };
 
   function holdDice(id) {
@@ -72,11 +75,18 @@ const App = () => {
     }
   }, [dice]);
 
+  useEffect(() => {
+    !tenzies ? setTimeout(() => setTimer(timer + 1), 1000) : setTimer(timer);
+  });
+
   return (
     <main>
       {tenzies && <Confetti width={width} height={height} />}
       <div className="game">
-        <p className="counter">Rolls: {counter}</p>
+        <div className="data">
+          <Timer tenzies={tenzies} timer={timer} />
+          <div className="counter">{counter} rolls</div>
+        </div>
         <h1 className="title">Tenzies</h1>
         <p className="description">
           Roll untill all dice are the same. <br /> Click each die to hold it at
