@@ -37,25 +37,35 @@ main {
 .data {
   display: flex;
   width: 90%;
-  align-items: center;
+  align-items: baseline;
+  font-family: "Oxanium", cursive;
 }
 
 .timer {
   width: 100%;
-  font-family: "Oxanium", cursive;
-  font-size: 0.8rem;
 }
 
 .timer > span {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
+.best {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-items: baseline;
+}
+
+.best-icon {
+  color: gold;
+  font-size: 1.2rem;
+}
 
 .counter {
   width: 100%;
   text-align: end;
   font-size: 0.9rem;
-  font-family: "Oxanium", cursive;
 }
 
 .title {

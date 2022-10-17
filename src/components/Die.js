@@ -9,7 +9,6 @@ import {
 } from "react-icons/gi";
 
 const Die = (props) => {
-  console.log(props.tenzies);
   const styles = {
     color:
       props.isHeld && props.tenzies

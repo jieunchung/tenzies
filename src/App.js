@@ -4,12 +4,17 @@ import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
 import Timer from "./components/Timer";
+import { BsFillTrophyFill } from "react-icons/bs";
 
 const App = () => {
   const [dice, setDice] = useState(allNewDice());
   const [tenzies, setTenzies] = useState(false);
   const [counter, setCounter] = useState(0);
   const [timer, setTimer] = useState(0);
+  const [record, setRecord] = useState(() => {
+    const score = localStorage.getItem("score");
+    return `${score}s` || "";
+  });
   const { width, height } = useWindowSize();
 
   function allNewDice() {
@@ -40,6 +45,10 @@ const App = () => {
         );
     tenzies ? setCounter(0) : setCounter(counter + 1);
     tenzies && setTimer(0);
+    setRecord(() => {
+      const score = localStorage.getItem("score");
+      return `${score}s`;
+    });
   };
 
   function holdDice(id) {
@@ -77,8 +86,27 @@ const App = () => {
   }, [dice]);
 
   useEffect(() => {
-    !tenzies ? setTimeout(() => setTimer(timer + 1), 1000) : setTimer(timer);
+    const oldHighScore = localStorage.getItem("score");
+
+    !tenzies
+      ? setTimeout(() => setTimer(timer + 1), 1000)
+      : setTimer(timer + 0);
+
+    if (oldHighScore === null) {
+      setRecord(`${timer}s`);
+    }
   });
+
+  useEffect(() => {
+    const oldHighScore = localStorage.getItem("score");
+
+    if (tenzies) {
+      if (oldHighScore == null || oldHighScore > timer) {
+        localStorage.setItem("score", timer);
+        setRecord("new record!");
+      }
+    }
+  }, [tenzies]);
 
   return (
     <main>
@@ -86,6 +114,10 @@ const App = () => {
       <div className="game">
         <div className="data">
           <Timer timer={timer} />
+          <div className="best">
+            <BsFillTrophyFill className="best-icon" />
+            {record}
+          </div>
           <div className="counter">{counter} rolls</div>
         </div>
         <h1 className="title">Tenzies</h1>
