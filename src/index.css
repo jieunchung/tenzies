@@ -96,6 +96,10 @@ main {
   cursor: pointer;
 }
 
+.dice {
+  animation: roll 2s;
+}
+
 .roll-button {
   background-color: #5035ff;
   color: #ffffff;
@@ -132,5 +136,17 @@ main {
     gap: 0;
     grid-template-columns: 40px 40px 40px 40px 40px;
     margin-bottom: 1rem;
+  }
+}
+
+@keyframes roll {
+  0% {
+    transform: rotateX(90deg);
+  }
+  10% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(0deg);
   }
 }

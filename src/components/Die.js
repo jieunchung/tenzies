@@ -20,17 +20,17 @@ const Die = (props) => {
   return (
     <div className="die" style={styles} onClick={props.holdDice}>
       {props.value === 1 ? (
-        <GiInvertedDice1 />
+        <GiInvertedDice1 className="dice" />
       ) : props.value === 2 ? (
-        <GiInvertedDice2 />
+        <GiInvertedDice2 className="dice" />
       ) : props.value === 3 ? (
-        <GiInvertedDice3 />
+        <GiInvertedDice3 className="dice" />
       ) : props.value === 4 ? (
-        <GiInvertedDice4 />
+        <GiInvertedDice4 className="dice" />
       ) : props.value === 5 ? (
-        <GiInvertedDice5 />
+        <GiInvertedDice5 className="dice" />
       ) : (
-        props.value === 6 && <GiInvertedDice6 />
+        props.value === 6 && <GiInvertedDice6 className="dice" />
       )}
     </div>
   );
